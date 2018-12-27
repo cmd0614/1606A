@@ -7,7 +7,7 @@
     <title>ES6快速回顾</title>
     <style>
     img{
-        width: 100%
+        width: 30%
     }
     </style>
 </head>
@@ -114,7 +114,60 @@
         })
 
         // 作业： 用三种方法实现十张图片全部加载完之后立刻添加到dom中,用多种发放实现十张图片谁先加载完谁添加到dom中
+       
+        let imgData = [{
+            id:1,
+            ssimg:'https://desk-fd.zol-img.com.cn/t_s144x90c5/g5/M00/02/01/ChMkJ1bKxPiIG76qAAs612-GgjcAALHPACxZksACzrv497.jpg'
+        },{
+            id:2,
+            ssimg:'https://desk-fd.zol-img.com.cn/t_s144x90c5/g5/M00/02/01/ChMkJlbKxPmIJgn1AAtNhH6bB1UAALHPAC8oToAC02c000.jpg'
+        },{
+            id:3,
+            ssimg:'https://desk-fd.zol-img.com.cn/t_s1280x800c5/g5/M00/02/01/ChMkJlbKxQyIJgarAAJaIRsKR2wAALHQAI3eDMAAlo5575.jpg'
+        },{
+            id:4,
+            ssimg:'https://desk-fd.zol-img.com.cn/t_s208x208c5/g5/M00/04/09/ChMkJ1oM6NKIIUP-AAcPx6M4Es8AAiNBQK9xwcABw_f602.jpg'
+        },{
+            id:5,
+            ssimg:'https://desk-fd.zol-img.com.cn/t_s144x90c5/g5/M00/02/01/ChMkJ1bKxPmIPsobAAtBGSxTZ00AALHPADeFZwAC0Ex487.jpg'
+        }]
+         // 图片加载完之后立刻添加到dom中
+        //  1.用promise.all实现
+        let promises = imgData.map(item=>loadImg(item.ssimg));
+        // Promise.all(promises).then(res=>{
+        //     res.forEach(item=>document.body.appendChild(item))
+        // })
+        // 2.用async/await实现
+        // (async function loadImgAysnc(){
+        //     let imgs = [];
+        //     for (let i=0,len=promises.length; i<len; i++){
+        //         imgs.push(await promises[i]);
+        //     }
+        //     imgs.forEach(item=>document.body.appendChild(item))
+        // })()
+        // 3.用轮询方式判断
+        // (()=>{
+        //     let result = [];
+        //     imgData.forEach(item=>{
+        //         let img = new Image();
+        //         img.onload = ()=>{
+        //             result.push(img);
+        //             if (result.length == imgData.length){
+        //                 result.forEach(item=>document.body.appendChild(item))
+        //             }
+        //         }
+        //         img.src = item.ssimg;
+        //     })
+        // })()
 
+
+        // 谁先加载完谁添加到dom中
+        (function loadImgAysnc(){
+            promises.forEach(async item=>{
+               let img = await item;
+               document.body.appendChild(img);
+            })
+        })()
     </script>
 </body>
 </html>
