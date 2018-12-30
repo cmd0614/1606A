@@ -3,7 +3,7 @@
 </template>
 
 <script>
-const JSBridge = require('./utils/JSBridge.js');
+import JSBridge from './utils/JSBridge.js';
 export default {
   name: 'app',
   data () {
