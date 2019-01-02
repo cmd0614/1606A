@@ -1,5 +1,6 @@
 <template>
-  <button @click="login">点击登陆</button>
+  <!-- <button @click="login">点击登陆</button> -->
+  <router-view></router-view>
 </template>
 
 <script>
@@ -22,6 +23,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import './scss/common.scss';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
