@@ -30,6 +30,16 @@ export let goLogin = ()=>{
   });
 }
 
+// 唤起支付
+export let goPay = ()=>{
+  JSBridge.invoke('app', 'pay', {
+    price: 398.00,
+    orderNum: '6486860195682793473',
+    channels: ["weixin","alipay","baidu"],
+    callbackUrl: 'https://h5.chelun.com/2017/update-licence2/order.html'
+  });
+}
+
 // 图片上传
 export let uploadImg = (type)=>{
   return new Promise((resolve, reject)=>{

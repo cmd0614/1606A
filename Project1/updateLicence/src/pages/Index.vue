@@ -14,13 +14,16 @@
         <van-picker :columns="typeArray" show-toolbar title="服务类型" @cancel="cancelType" @confirm="confirmType"/>
       </van-popup>
     </section>
+
+    <button @click="click">立即支付</button>
   </div>
 </template>
 
 <script>
 import Upload from '@/components/Upload';
 import CityPicker from '@/components/CityPicker';
-import {isVip} from '@/api/index';
+import {isVip, goPay} from '@/api/index';
+
 export default {
   data(){
     return {
@@ -45,6 +48,9 @@ export default {
     confirmType(value){
       this.form.type = value;
       this.cancelType();
+    },
+    click(){
+      goPay();
     }
   },
   mounted(){
