@@ -20,6 +20,7 @@
 <script>
 import Upload from '@/components/Upload';
 import CityPicker from '@/components/CityPicker';
+import {isVip} from '@/api/index';
 export default {
   data(){
     return {
@@ -47,7 +48,9 @@ export default {
     }
   },
   mounted(){
-    fetch('/api/ExchangeJiaZhao/getCostList?order_type=1&city_id=110100000000&province_id=110')
+    isVip().then(res=>{
+      console.log('isVip...', res);
+    })
   }
 }
 </script>
