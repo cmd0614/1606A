@@ -15,8 +15,16 @@
       </van-popup>
     </section>
 
-    <button @click="click">立即支付</button>
+    <div>
+      <!-- accept设置为*号会在客户端上卡顿，最好用逗号连接 -->
+      <input type="file" accept="image/png,image/jpg,image/jpeg,image/gif" @change="uploadFile">
+      上传图片
+    </div>
 
+    <canvas id="canvas"></canvas>
+
+    <button @click="click">立即支付</button>
+    <router-link to="/address">跳转地址</router-link>
     <div class="bottom">
       <button id="cc">联系客服</button>
       <a href="tel: 17621526605">拨打电话</a>
@@ -27,9 +35,10 @@
 <script>
 import Upload from '@/components/Upload';
 import CityPicker from '@/components/CityPicker';
-import {isVip, goPay} from '@/api/index';
+import {isVip, goPay, uploadBase64} from '@/api/index';
 
 export default {
+  name:'Index',
   data(){
     return {
       showType: false,
@@ -56,18 +65,60 @@ export default {
     },
     click(){
       goPay();
+    },
+    uploadFile(e){
+      console.log('file...', e.target.files[0].size);
+      let file = e.target.files[0];
+      // 先判断图片是否过大
+      if (file.size > 30*1024){
+        // 转成base64
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = res=>{
+          console.log('res.result...', res.target.result);
+          let img = new Image();
+          img.src = res.target.result;
+          img.onload = async ()=>{
+            // 创建canvas进行压缩
+            let canvas = document.getElementById('canvas');
+            let context = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            // 第一种压缩，压缩画布大小
+            context.drawImage(img, 0,0,img.width, img.height, 0,0, img.width, img.height);
+
+            let base64 = canvas.toDataURL();
+            let res = await uploadBase64(base64);
+            console.log('res...', res);
+
+            // 第二种压缩，压缩图片质量
+            let base65 = canvas.toDataURL('image/jpeg', 0.1);
+            let res2 = await uploadBase64(base65);
+            console.log('res2...', res2);
+          }
+        }
+      }
     }
   },
   mounted(){
     isVip().then(res=>{
       console.log('isVip...', res);
     })
+  },
+  activated(){
+    console.log('重新激活...');
+  },
+  deactivated(){
+    console.log('....');
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .popup{
+  width: 100%;
+}
+canvas{
   width: 100%;
 }
 .bottom{

@@ -4,7 +4,10 @@ import JSBridge from '@/utils/JSBridge.js';
 function sendRequest(url, method = 'GET', data = {}) {
   let params = {
       method,
-      credentials: 'include'
+      // credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
   };
   // 判断如果是一个post请求，带上请求体信息
   if (method == 'POST') {
@@ -28,6 +31,11 @@ export let goLogin = ()=>{
   JSBridge.invoke('app', 'login', {
     loginCallBackName: ()=>window.reload()
   });
+}
+
+// 唤醒分享
+export let goShare = ()=>{
+  JSBridge.invoke('ui', 'shareMessage')
 }
 
 // 唤起支付
@@ -54,16 +62,21 @@ export let uploadImg = (type)=>{
 
 // 获取签发城市
 export let cityList = ()=>{
-  return sendRequest('/api/ExchangeJiaZhao/cityList')
+  return sendRequest('/api1/ExchangeJiaZhao/cityList')
 }
 
 // 获取可补换的城市
 export let costList = (...params)=>{
   // console.log('params...', params);
-  return sendRequest(`/api/ExchangeJiaZhao/getCostList?order_type=${params[0]}&province_id=${params[1]}&city_id=${params[2]}`)
+  return sendRequest(`/api1/ExchangeJiaZhao/getCostList?order_type=${params[0]}&province_id=${params[1]}&city_id=${params[2]}`)
 }
 
 // 获取用户是否是会员
 export let isVip = ()=>{
-  return sendRequest('https://vip.chelun.com/api/status')
+  return sendRequest('/api2/api/status')
+}
+
+// 上传base64图片
+export let uploadBase64 = (base64)=>{
+  return sendRequest('http://123.206.55.50:11000/upload_base64', 'POST', {base64})
 }

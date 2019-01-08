@@ -6,12 +6,19 @@ import {goLogin} from '@/api/index';
 Vue.use(VueRouter);
 
 // 引入路由组件
-import IndexPage from '@/pages/Index';
+// import IndexPage from '@/pages/Index';
+// import AddressPage from '@/pages/Address';
+
+const IndexPage = ()=>import('@/pages/Index');
+const AddressPage = ()=>import('@/pages/Address');
 
 const router = new VueRouter({
   routes: [{
     path: '/index',
     component: IndexPage
+  },{
+    path: '/address',
+    component: AddressPage
   }, {
     path: '*',
     redirect: '/index'

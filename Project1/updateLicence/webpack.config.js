@@ -81,11 +81,18 @@ module.exports = {
     noInfo: true,
     overlay: true,
     proxy: {
-      '/api': {
+      '/api1': {
         target: 'https://chezhu.eclicks.cn/',
         changeOrigin: true,
         pathRewrite: {
-          '/api': '/'
+          '/api1': '/'
+        }
+      },
+      '/api2': {
+        target: 'https://vip.chelun.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '/api2': '/'
         }
       }
     }
