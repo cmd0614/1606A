@@ -11,6 +11,7 @@ Vue.use(VueRouter);
 
 const IndexPage = ()=>import('@/pages/Index');
 const AddressPage = ()=>import('@/pages/Address');
+const CanvasPage = ()=>import('@/pages/Canvas');
 
 const router = new VueRouter({
   routes: [{
@@ -19,6 +20,9 @@ const router = new VueRouter({
   },{
     path: '/address',
     component: AddressPage
+  },{
+    path: '/canvas',
+    component: CanvasPage
   }, {
     path: '*',
     redirect: '/index'
