@@ -13,6 +13,7 @@
         <button @click="cancel">取消</button>
       </div>
     </section>
+    <p>{{name}}</p>
   </ul>
 </template>
 
@@ -28,6 +29,17 @@ export default {
       current: {},
       showMask: false
     }
+  },
+  inject: {
+    name: {
+      default: '1606A'
+    },
+    login: {
+      default: ()=>{}
+    }
+  },
+  mounted(){
+    this.login(1000);
   },
   computed: {
     ...mapState({

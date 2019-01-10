@@ -1,19 +1,40 @@
 <template>
   <!-- <button @click="login">点击登陆</button> -->
-  <keep-alive exclude="Index">
-    <router-view></router-view>
-  </keep-alive>
+  <div>
+    <keep-alive exclude="Index">
+      <router-view></router-view>
+    </keep-alive>
+    <p>{{name}}</p>
+  </div>
+
 </template>
 
 <script>
 import JSBridge from './utils/JSBridge.js';
+import {login} from '@/mixin/index';
 export default {
   name: 'app',
-  data () {
-    return {}
+  mixins: [login],
+  data(){
+    return {
+      name: 'NAME'
+    }
+  },
+  provide(){
+    return {
+      name: 'updateLicence',
+      login: (res)=>{
+        this.login(res);
+      }
+    }
+  },
+  mounted(){
+    this.getName();
+    console.log('getName...', this.name);
   },
   methods: {
-    login(){
+    login(num){
+      console.log('num...', num);
       JSBridge.invoke('app', 'login', {
         loginCallBackName: (res)=>{
           console.log('res...', res);
