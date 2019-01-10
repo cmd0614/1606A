@@ -31,6 +31,7 @@ import nestedRouter from './modules/nested'
     breadcrumb: false            if false, the item will hidden in breadcrumb(default is true)
   }
 **/
+// 常量路由,谁都能够访问
 export const constantRouterMap = [
   {
     path: '/redirect',
@@ -109,7 +110,7 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
-
+// 异步路由,鉴权之后再动态渲染
 export const asyncRouterMap = [
   {
     path: '/permission',
