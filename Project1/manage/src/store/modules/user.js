@@ -1,5 +1,6 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/login'
+import { loginByUsername, logout, register, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import md5 from 'md5';
 
 const user = {
   state: {
@@ -58,7 +59,22 @@ const user = {
         })
       })
     },
-
+    // 用户注册
+    registerByUserName({commit}, userInfo){
+      return new Promise((resolve, reject)=>{
+        let {username, password, phone} = userInfo;
+        register(username, md5(password+'1606A'), phone).then(response=>{
+          console.log('response...', response);
+          if (response.data.code == 1){
+            commit('SET_TOKEN', 'admin')
+            setToken('admin')
+            resolve()
+          }else{
+            reject(response.data.msg)
+          }
+        })
+      })
+    },
     // 获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {

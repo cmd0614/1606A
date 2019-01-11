@@ -69,6 +69,20 @@ export default {
       this.$refs.registerForm.validate(valid=>{
         if (valid){
           console.log('校验成功');
+          this.$store.dispatch('registerByUserName', this.registerForm).then(res=>{
+            console.log('res...', res);
+            this.$message({
+              message: '注册成功',
+              center: true,
+              type: 'success'
+            });
+          }).catch(err=>{
+            this.$message({
+              message: err,
+              center: true,
+              type: 'error'
+            });
+          })
         }else{
 
         }
