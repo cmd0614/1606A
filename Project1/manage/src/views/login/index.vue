@@ -38,6 +38,7 @@
       </el-form-item>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">{{ $t('login.logIn') }}</el-button>
+      <el-button type="primary" style="width:100%;margin-bottom:30px;margin-left:0;" @click.native.prevent="handleRegister">{{ $t('login.register') }}</el-button>
 
       <div style="position:relative">
         <div class="tips">
@@ -87,13 +88,20 @@ export default {
         callback()
       }
     }
+    const username = (rule, value, callback) => {
+      if (value.length < 5){
+        callback(new Error('用户名长度必须大于5'))
+      }else{
+        callback()
+      }
+    }
     return {
       loginForm: {
         username: 'admin',
         password: '1111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        username: [{ required: true, trigger: 'blur' }, {trigger: 'blur', validator: username}],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -139,6 +147,9 @@ export default {
           return false
         }
       })
+    },
+    handleRegister(){
+      this.$router.replace('/register')
     },
     afterQRScan() {
       // const hash = window.location.hash.slice(1)
