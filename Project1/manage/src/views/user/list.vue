@@ -166,7 +166,8 @@
       ...mapActions({
         getUserList: 'list/getUserList',
         updateUserInfo: 'list/updateUserInfo',
-        deleteUser: 'list/deleteUser'
+        deleteUser: 'list/deleteUser',
+        modifyRoler: 'list/modifyRoler'
       }),
       handleEdit(index, row) {
         console.log('index...', index, row);
@@ -214,27 +215,49 @@
         this.myRolers = [...new Set(this.myRolers)];
       },
       submit(){
-        this.$refs.form.validate(valid=>{
-          if (valid){
-            console.log('currentUser...', this.currentUser);
-            let {id,username,profile,email,phone} = this.currentUser;
-            this.updateUserInfo({id, username, profile, email, phone}).then(res=>{
-              this.$message({
-                message: res,
-                center: true,
-                type: 'success'
-              });
-              this.getUserList({page: this.current});
-            }).catch(err=>{
-              this.$message({
-                message: err,
-                center: true,
-                type: 'error'
-              });
-            })
-            this.showDialog = false;
-          }
-        })
+        if (this.type == 'edit'){
+          this.$refs.form.validate(valid=>{
+            if (valid){
+              console.log('currentUser...', this.currentUser);
+              let {id,username,profile,email,phone} = this.currentUser;
+              this.updateUserInfo({id, username, profile, email, phone}).then(res=>{
+                this.$message({
+                  message: res,
+                  center: true,
+                  type: 'success'
+                });
+                this.getUserList({page: this.current});
+              }).catch(err=>{
+                this.$message({
+                  message: err,
+                  center: true,
+                  type: 'error'
+                });
+              })
+              this.showDialog = false;
+            }
+          })
+        }else if(this.type == 'roler'){
+          let {id} = this.currentUser;
+          let rolersId = this.myRolers.map(item=>{
+            return this.rolers.findIndex(value=>value==item)+1
+          })
+          this.modifyRoler({uid: id, rolersId}).then(res=>{
+            this.$message({
+              message: res,
+              center: true,
+              type: 'success'
+            });
+            this.getUserList({page: this.current});
+          }).catch(err=>{
+            this.$message({
+              message: err,
+              center: true,
+              type: 'error'
+            });
+          })
+          this.showDialog = false;
+        }
       }
     }
   }
