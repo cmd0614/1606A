@@ -83,10 +83,7 @@ export default {
     }
   },
   computed: {
-    data(){
-      console.log('formatData...', this.formatData(this.organize));
-      return this.formatData(this.organize)
-    }
+
   },
   methods: {
     formatData(arr){
@@ -100,7 +97,6 @@ export default {
       })
       console.log('newArr...', newArr);
       this.newData = newArr;
-      // return newArr;
     },
     // 递归查找当前项的父元素
     findItem(arr, item){
