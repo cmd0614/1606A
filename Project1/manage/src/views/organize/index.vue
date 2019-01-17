@@ -1,39 +1,52 @@
 <template>
   <div>
-    <h1>{{this.$route.path}}</h1>
-    <div class="block">
-      <el-tree
-        :data="newData"
-        show-checkbox
-        node-key="id"
-        default-expand-all
-        :expand-on-click-node="false">
-        <span class="custom-tree-node" slot-scope="{ node, data }">
-          <span>{{ node.data.name }}</span>
-           <span>
-            <el-button
-              type="text"
-              v-permission="['admin']"
-              size="mini"
-              @click="() => append(node, data)">
-              Append
-            </el-button><!--
-            <el-button
-              type="text"
-              size="mini"
-              @click="() => remove(node, data)">
-              Delete
-            </el-button>-->
-          </span>
+    <el-tree
+      :data="newData"
+      show-checkbox
+      ref="tree"
+      node-key="id"
+      draggable
+      default-expand-all
+      :expand-on-click-node="false">
+      <span class="custom-tree-node" slot-scope="{ node, data }">
+        <span>{{ node.data.name }}</span>
+          <span>
+          <el-button
+            type="text"
+            v-permission="['staff']"
+            size="mini"
+            @click="() => append(node, data)">
+            Append
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            v-permission="['staff']"
+            @click="() => remove(node, data)">
+            Delete
+          </el-button>
         </span>
-      </el-tree>
-    </div>
+      </span>
+    </el-tree>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="50%">
+      <el-input placeholder="请输入你要添加的职位" v-model="temp"/>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleSubmit">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
 export default {
   data(){
     return {
+      dialogVisible: false,
+      current: {},
+      temp: '',
       newData: [],
       organize: [{
           id: 1, name: '***事业部', parentid: ''
@@ -114,8 +127,31 @@ export default {
         }
       })
     },
+    // 添加职位
     append(node, data){
+      this.dialogVisible = true;
       console.log('node...', node, 'data...', data);
+      this.current = {
+        node,
+        data
+      }
+    },
+    // 删除职位
+    remove(node, data){
+      this.$refs.tree.remove(node);
+    },
+    handleSubmit(){
+      if (this.temp){
+        let newData = {
+          id: this.organize[this.organize.length-1].id+1,
+          name: this.temp,
+          parentid: this.current.data.id
+        }
+        this.organize.push(newData)
+        this.$refs.tree.append(newData, this.current.node);
+        this.dialogVisible = false;
+        this.temp = '';
+      }
     }
   },
   created(){
