@@ -26,6 +26,8 @@ import './permission' // permission control
 import './mock' // simulation data
 // 引入自定义过滤器
 import * as filters from './filters' // global filters
+// 引入自定义指令
+import './directive/permission/index'
 
 // 使用element-ui
 Vue.use(Element, {

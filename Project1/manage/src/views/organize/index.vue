@@ -2,28 +2,28 @@
   <div>
     <h1>{{this.$route.path}}</h1>
     <div class="block">
-      <p>使用 scoped slot</p>
       <el-tree
-        :data="data5"
+        :data="newData"
         show-checkbox
         node-key="id"
         default-expand-all
         :expand-on-click-node="false">
         <span class="custom-tree-node" slot-scope="{ node, data }">
-          <span>{{ node.label }}</span>
-          <span>
+          <span>{{ node.data.name }}</span>
+           <span>
             <el-button
               type="text"
+              v-permission="['admin']"
               size="mini"
-              @click="() => append(data)">
+              @click="() => append(node, data)">
               Append
-            </el-button>
+            </el-button><!--
             <el-button
               type="text"
               size="mini"
               @click="() => remove(node, data)">
               Delete
-            </el-button>
+            </el-button>-->
           </span>
         </span>
       </el-tree>
@@ -34,6 +34,7 @@
 export default {
   data(){
     return {
+      newData: [],
       organize: [{
           id: 1, name: '***事业部', parentid: ''
         },{
@@ -79,8 +80,50 @@ export default {
         },{
           id: 22, name: '孙月', parentid: 20
         }]
-
     }
+  },
+  computed: {
+    data(){
+      console.log('formatData...', this.formatData(this.organize));
+      return this.formatData(this.organize)
+    }
+  },
+  methods: {
+    formatData(arr){
+      let newArr = [];
+      arr.forEach(item=>{
+        if (!item.parentid){
+          newArr.push(item);
+        }else{
+          this.findItem(newArr, item);
+        }
+      })
+      console.log('newArr...', newArr);
+      this.newData = newArr;
+      // return newArr;
+    },
+    // 递归查找当前项的父元素
+    findItem(arr, item){
+      arr.forEach(value=>{
+        // 如果在当前数组里找到了
+        if (value.id == item.parentid){
+          if (value.children){
+            value.children.push(item);
+          }else{
+            value.children = [item];
+          }
+        }else if(value.children){
+          // 如果后代存在，去后代里查找
+          this.findItem(value.children, item)
+        }
+      })
+    },
+    append(node, data){
+      console.log('node...', node, 'data...', data);
+    }
+  },
+  created(){
+    this.formatData(this.organize);
   }
 }
 </script>
