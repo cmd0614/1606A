@@ -280,19 +280,19 @@
         }
       },
       handleDownload() {
-        this.downloadLoading = true
+        this.downloadLoading = true;
         import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['Id', 'UserName', 'Profile', 'Email', 'Phone']
+          const tHeader = Object.keys(this.tableData[0]);
           const data = this.tableData.map(item=>{
-            let {id, username, profile, email, phone} = item;
-            return [id, username, profile, email, phone]
+            return Object.values(item);
           })
+
           console.log('tHeader...', tHeader, data);
           excel.export_json_to_excel({
             header: tHeader,
             data,
-            filename: '',
-            autoWidth: 'auto',
+            filename: '用户信息',
+            autoWidth: 'true',
             bookType: 'xlsx'
           })
           this.downloadLoading = false
