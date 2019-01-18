@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="document" @click="handleDownload">{{ $t('excel.export') }} Excel</el-button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="ID" width="60">
       </el-table-column>
@@ -151,6 +152,7 @@
         rolers: ['boss', 'developer', 'producter', 'operator', 'designer'],
         myRolers: [],
         showDialog: false,
+        downloadLoading: false,
         editRules: {
           username: [{trigger:'blur', required: true, message: '用户名必填'}],
           profile: [{trigger:'blur', required: true, validator: profileValidator}],
@@ -280,16 +282,18 @@
       handleDownload() {
         this.downloadLoading = true
         import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
-          const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
-          const list = this.list
-          const data = this.formatJson(filterVal, list)
+          const tHeader = ['Id', 'UserName', 'Profile', 'Email', 'Phone']
+          const data = this.tableData.map(item=>{
+            let {id, username, profile, email, phone} = item;
+            return [id, username, profile, email, phone]
+          })
+          console.log('tHeader...', tHeader, data);
           excel.export_json_to_excel({
             header: tHeader,
             data,
-            filename: this.filename,
-            autoWidth: this.autoWidth,
-            bookType: this.bookType
+            filename: '',
+            autoWidth: 'auto',
+            bookType: 'xlsx'
           })
           this.downloadLoading = false
         })
