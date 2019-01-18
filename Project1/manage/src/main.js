@@ -28,6 +28,10 @@ import './mock' // simulation data
 import * as filters from './filters' // global filters
 // 引入自定义指令
 import permission from './directive/permission/index'
+// 引入v-chart
+import VCharts from 'v-charts'
+
+Vue.use(VCharts)
 Vue.directive('permission', permission)
 
 // 使用element-ui

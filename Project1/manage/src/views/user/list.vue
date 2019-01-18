@@ -10,7 +10,7 @@
       </el-table-column>
       <el-table-column label="创建时间" width="80">
         <template slot-scope="scope">
-          <span>{{scope.row.create_time | toThousandFilter}}</span>
+          <span :title="scope.row.create_time | formatDate">{{scope.row.create_time}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="username" label="姓名" width="100">
@@ -71,8 +71,9 @@
         </el-form-item>
         <el-form-item v-if="type=='edit'" label="头像">
           <el-upload
-            action="123"
+            action="http://123.206.55.50:11000/upload"
             class="avatar-uploader"
+            :on-success="uploadSuccess"
             :show-file-list="false">
             <img v-if="currentUser.avatar" :src="currentUser.avatar" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -174,6 +175,18 @@
         deleteUser: 'list/deleteUser',
         modifyRoler: 'list/modifyRoler'
       }),
+      uploadSuccess(res, file, fileList){
+        console.log('res...', res, file, fileList);
+        if (res.code == 1){
+          this.currentUser.avatar = res.data[0].path;
+        }else{
+          this.$message({
+            message: res.msg,
+            center: true,
+            type: 'success'
+          });
+        }
+      },
       handleEdit(index, row) {
         console.log('index...', index, row);
         this.type = 'edit';
@@ -224,8 +237,8 @@
           this.$refs.form.validate(valid=>{
             if (valid){
               console.log('currentUser...', this.currentUser);
-              let {id,username,profile,email,phone} = this.currentUser;
-              this.updateUserInfo({id, username, profile, email, phone}).then(res=>{
+              let {id,username,avatar,profile,email,phone} = this.currentUser;
+              this.updateUserInfo({id, avatar, username, profile, email, phone}).then(res=>{
                 this.$message({
                   message: res,
                   center: true,
@@ -263,6 +276,23 @@
           })
           this.showDialog = false;
         }
+      },
+      handleDownload() {
+        this.downloadLoading = true
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
+          const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+          const list = this.list
+          const data = this.formatJson(filterVal, list)
+          excel.export_json_to_excel({
+            header: tHeader,
+            data,
+            filename: this.filename,
+            autoWidth: this.autoWidth,
+            bookType: this.bookType
+          })
+          this.downloadLoading = false
+        })
       }
     }
   }
