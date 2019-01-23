@@ -4,12 +4,14 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 // create an axios instance
+// 创建一个axios的实例
 const service = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url
   timeout: 5000 // request timeout
 })
 
 // request interceptor
+// 请求拦截器，每个请求被包裹一层，可以添加一部分公共逻辑在里面
 service.interceptors.request.use(
   config => {
     // Do something before request is sent
@@ -27,6 +29,7 @@ service.interceptors.request.use(
 )
 
 // response interceptor
+// 响应拦截器，每个响应都会在这里被先处理一遍
 service.interceptors.response.use(
   response => response,
   /**
