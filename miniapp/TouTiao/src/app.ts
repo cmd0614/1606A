@@ -16,10 +16,10 @@ class App extends Vue {
   // app hook
   onLaunch() {
     let opt = this.$root.$mp.appOptions
-    debug('onLaunch', opt)
-    Api.login().then(res => {
-      debug('login', res)
-    })
+    // debug('onLaunch', opt)
+    // Api.login().then(res => {
+    //   debug('login', res)
+    // })
   }
 
   onShow() {

@@ -1,5 +1,4 @@
 import { Vue, Component } from 'vue-property-decorator'
-import { AppUrls } from '@/utils/consts.ts'
 import Card from '@/components/card.vue' // mpvue目前只支持的单文件组件
 import CompB from '@/components/compb.vue' // mpvue目前只支持的单文件组件
 
@@ -12,12 +11,18 @@ const debug = require('debug')('log:Index')
     CompB, //注意，vue的组件在template中的用法，`CompB` 会被转成 `comp-b`
   }
 })
+// @connect
 class Index extends Vue {
-  AppUrls = AppUrls
   ver: number = 123
+
+  get channels(){
+    console.log('channels...', this.$store.state.index.channels);
+    return this.$store.state.index.channels;
+  }
 
   onShow() { // 小程序 hook
     debug('onShow')
+    this.$store.dispatch('index/getSetting');
   }
 
   mounted() { // vue hook

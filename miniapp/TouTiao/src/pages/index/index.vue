@@ -1,25 +1,45 @@
 <template>
   <div class="counter-warp">
     <i-button>按钮</i-button>
-    <i-button v-on:click="handleClick" >默认按钮</i-button>
-    <i-button v-on:click="handleClick" type="error" long="true">联通两边按钮</i-button>
-    <i-button v-on:click="handleClick"  type="primary">Primary</i-button>
-    <i-button v-on:click="handleClick" type="ghost">Ghost</i-button>
-    <i-button v-on:click="handleClick" type="info">Info</i-button>
-    <i-button v-on:click="handleClick" type="success">Success</i-button>
-    <i-button v-on:click="handleClick" type="warning">Warning</i-button>
-    <i-button v-on:click="handleClick" type="error">Error</i-button>
 
-    <a :href="AppUrls.COUNTER" class="home">去往vuex</a>
-    <a :href="AppUrls.PACKAGE_A" class="home">分包A</a>
-    <a href="/pages/testExtend/main" class="home">测试继承</a>
+    <i-button>{{name}}</i-button>
+
+    <i-button v-for="(item, index) in channels" :key="index">{{item.name}}</i-button>
   </div>
 </template>
 <!--必须指定为ts-->
+
 <script lang="ts" src="./index.ts"></script>
+<!--// function name(target, name, description){
+//   console.log('target...', target)
+//   target.prototype.cname = 'A'
+//   target.prototype.sayName = function(){
+//     return this.cname;
+//   }
+// }
+
+// @connect()
+// @name
+// class A{
+
+// }
+
+// export default {
+//   computed: {
+//     name(){
+//       return (new A()).cname
+//     }
+//   },
+//   mounted() {
+//     let b = new A();
+//     console.log('b....', b.cname);
+//     console.log(b.sayName());
+//   },
+// }
+// </script> -->
 
 
-<style lang="less">
+<style lang="less" scoped>
   @import "./index";
 
   .counter-warp {

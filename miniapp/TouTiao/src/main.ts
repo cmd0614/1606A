@@ -1,5 +1,6 @@
 import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from 'vue-property-decorator';
 import { VueConstructor } from "vue";
+import store from '@/store/index';
 
 let isApp = false; //尝试mpvue-entry
 let MyApp;
@@ -29,6 +30,7 @@ Component.registerHooks([
 ])
 
 Vue.config.productionTip = false
+Vue.prototype.$store = store;
 /* app-only-end */
 
 if (isApp) {
