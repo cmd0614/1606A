@@ -4,7 +4,7 @@
 
     <i-button>{{name}}</i-button>
 
-    <i-button v-for="(item, index) in channels" :key="index">{{item.name}}</i-button>
+    <i-button v-for="(item, index) in channel" :key="index">{{item.name}}</i-button>
   </div>
 </template>
 <!--必须指定为ts-->

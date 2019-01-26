@@ -4,11 +4,18 @@ import CompB from '@/components/compb.vue' // mpvue目前只支持的单文件�
 
 const debug = require('debug')('log:Index')
 
+import {mapState} from 'vuex'
+
 // 必须使用装饰器的方式来指定component
 @Component({
   components: {
     Card,
     CompB, //注意，vue的组件在template中的用法，`CompB` 会被转成 `comp-b`
+  },
+  computed: {
+    ...mapState({
+      channel: state=>state['index']['channels']
+    })
   }
 })
 // @connect
