@@ -40,18 +40,18 @@ fly.interceptors.response.use(
   }
 )
 
-function postForm(url, data) {
-  return fly.request(url, data, {
-    method: 'post',
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-  })
-}
+// function postForm(url, data) {
+//   return fly.request(url, data, {
+//     method: 'post',
+//     headers: { 'content-type': 'application/x-www-form-urlencoded' },
+//   })
+// }
 interface WxApiOpt<T> {
   success: (res: T) => void
   fail: (e: any) => void
 }
 
-function wxApiToPromise<T>(api: (a: WxApiOpt<T>) => void, arg1?): Promise<T> {
+export function wxApiToPromise<T>(api: (a: WxApiOpt<T>) => void, arg1?): Promise<T> {
   return new Promise((resolve, reject) => {
     let opt = merge({
       success(r) {
@@ -65,16 +65,16 @@ function wxApiToPromise<T>(api: (a: WxApiOpt<T>) => void, arg1?): Promise<T> {
   })
 }
 
-const Api = {
-  login() {
-    return wxApiToPromise(wx.login, {}).then(res => {
-      console.log(res.code)
-      return res
-    })
-  },
-  testForm() {
-    return postForm(HOST, { a: 1 })
-  }
-}
-export default Api
+// const Api = {
+//   login() {
+//     return wxApiToPromise(wx.login, {}).then(res => {
+//       console.log(res.code)
+//       return res
+//     })
+//   },
+//   testForm() {
+//     return postForm(HOST, { a: 1 })
+//   }
+// }
+export default fly
 

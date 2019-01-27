@@ -4,7 +4,7 @@ import CompB from '@/components/compb.vue' // mpvue目前只支持的单文件�
 
 const debug = require('debug')('log:Index')
 
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 // 必须使用装饰器的方式来指定component
 @Component({
@@ -14,7 +14,12 @@ import {mapState} from 'vuex'
   },
   computed: {
     ...mapState({
-      channel: state=>state['index']['channels']
+      channels: state=>state['index'].channels
+    })
+  },
+  methods: {
+    ...mapActions({
+      getSetting: 'index/getSetting'
     })
   }
 })
@@ -22,14 +27,13 @@ import {mapState} from 'vuex'
 class Index extends Vue {
   ver: number = 123
 
-  get channels(){
-    console.log('channels...', this.$store.state.index.channels);
-    return this.$store.state.index.channels;
+  get list(){
+    return [1,2,3,4]
   }
 
   onShow() { // 小程序 hook
     debug('onShow')
-    this.$store.dispatch('index/getSetting');
+    this['getSetting']();
   }
 
   mounted() { // vue hook
@@ -39,6 +43,12 @@ class Index extends Vue {
   handleClick():number{
     console.log('触发了点击事件')
     return 100
+  }
+
+  goDetail(): void{
+    wx.navigateTo({
+      url: '/pages/detail/main'
+    });
   }
 }
 

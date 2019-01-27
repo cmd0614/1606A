@@ -1,10 +1,10 @@
 <template>
   <div class="counter-warp">
-    <i-button>按钮</i-button>
+    <i-button @click="goDetail">去详情页</i-button>
 
     <i-button>{{name}}</i-button>
 
-    <i-button v-for="(item, index) in channel" :key="index">{{item.name}}</i-button>
+    <i-button v-for="(item, index) in channels" :key="index">{{item.name}}</i-button>
   </div>
 </template>
 <!--必须指定为ts-->
