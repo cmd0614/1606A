@@ -1,0 +1,7 @@
+<template name="40c52792">
+  <view class="_div data-v-60d0f548">
+    <view class="_p data-v-60d0f548">{{msg}}</view>
+    <view class="_p data-v-60d0f548">我是列表组件</view>
+    <view wx:key="index" key="{{index}}" wx:for="{{list}}" wx:for-index="index" wx:for-item="item" class="_p data-v-60d0f548">{{item.content.title}}</view>
+  </view>
+</template>

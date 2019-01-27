@@ -1,7 +1,15 @@
-<template name="5f27039e">
+<import src="/components/card.vue.wxml" />
+<import src="/components/list.vue.wxml" /><template name="5f27039e">
   <view class="_div data-v-177fa02f counter-warp">
-    <i-button bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_i-button data-v-177fa02f">去详情页</i-button>
-    <i-button class="_i-button data-v-177fa02f">{{name}}</i-button>
-    <i-button wx:key="index" key="{{index}}" wx:for="{{channels}}" wx:for-index="index" wx:for-item="item" class="_i-button data-v-177fa02f">{{item.name}}</i-button>
+    <view class="_div data-v-177fa02f header">
+      <i-icon type="search" size="28" color="#000" class="_i-icon data-v-177fa02f"></i-icon>
+      <view class="_div data-v-177fa02f tabs">
+        <i-tabs current="{{current}}" scroll bindchange="handleProxy" color="#f85151" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_i-tabs data-v-177fa02f">
+          <i-tab i-class="tab" wx:key="index" key="{{index}}" data-url="{{item.url}}" title="{{item.name}}" wx:for="{{channels}}" wx:for-index="index" wx:for-item="item" class="_i-tab data-v-177fa02f"></i-tab>
+        </i-tabs>
+      </view>
+      <i-icon type="add" size="28" color="#000" class="_i-icon data-v-177fa02f"></i-icon>
+      <i-icon type="group" size="28" color="#000" class="_i-icon data-v-177fa02f"></i-icon>
+    </view> <template text="card component" data="{{...$root[$kk+'5'], $root}}" is="1fdb2df8"></template> <template data="{{...$root[$kk+'6'], $root}}" is="40c52792"></template>
   </view>
 </template>

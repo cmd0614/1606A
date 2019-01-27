@@ -1,58 +1,40 @@
 <template>
   <div class="counter-warp">
-    <i-button @click="goDetail">去详情页</i-button>
-
-    <i-button>{{name}}</i-button>
-
-    <i-button v-for="(item, index) in channels" :key="index">{{item.name}}</i-button>
+    <!-- 头部 -->
+    <div class="header">
+      <i-icon type="search" size="28" color="#000" />
+      <div class="tabs">
+        <i-tabs :current="current" scroll @change="tabChange" color="#f85151">
+          <i-tab i-class="tab" v-for="(item, index) in channels" :key="index" :data-url="item.url" :title="item.name"></i-tab>
+        </i-tabs>
+      </div>
+      <i-icon type="add" size="28" color="#000" />
+      <i-icon type="group" size="28" color="#000" />
+    </div>
+    <!-- 新闻列表 -->
+    <!-- <list list="[1,2,3]"></list> -->
+    <card text="card component"></card>
+    <list :list="newsList"></list>
   </div>
 </template>
+
 <!--必须指定为ts-->
-
 <script lang="ts" src="./index.ts"></script>
-<!--// function name(target, name, description){
-//   console.log('target...', target)
-//   target.prototype.cname = 'A'
-//   target.prototype.sayName = function(){
-//     return this.cname;
-//   }
-// }
-
-// @connect()
-// @name
-// class A{
-
-// }
-
-// export default {
-//   computed: {
-//     name(){
-//       return (new A()).cname
-//     }
-//   },
-//   mounted() {
-//     let b = new A();
-//     console.log('b....', b.cname);
-//     console.log(b.sayName());
-//   },
-// }
-// </script> -->
-
 
 <style lang="less" scoped>
-  @import "./index";
-
-  .counter-warp {
-    text-align: center;
-    margin-top: 100px;
+  .header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .tabs{
+      flex: 1;
+      overflow: scroll;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
+    }
   }
-
-  .home {
-    display: block;
-    margin: 10px auto;
-    padding: 5px 10px;
-    color: blue;
-    border: 1px solid blue;
+  .tab{
+    font-size: 24rpx;
   }
-
 </style>

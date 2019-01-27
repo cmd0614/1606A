@@ -3,18 +3,10 @@
     "pages/index/main",
     "pages/detail/main"
   ],
-  "subPackages": [
-    {
-      "root": "packageA",
-      "pages": [
-        "pages/index/main"
-      ]
-    }
-  ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#d43d3d",
+    "navigationBarTitleText": "今日头条",
+    "navigationBarTextStyle": "white"
   }
 }

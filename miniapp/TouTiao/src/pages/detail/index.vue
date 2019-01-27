@@ -1,20 +1,10 @@
 <template>
   <div>
-    <p>我是Detail页面</p>
+    <p>我是{{msg}}页面</p>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-// 必须使用装饰器的方式来指定component
-@Component({})
-class Detail extends Vue {
-  mounted() { // vue hook
-  }
-}
-
-export default Detail
-</script>
+<script lang="ts" src="./index.ts"></script>
 
 <style lang="less" scoped>
 
