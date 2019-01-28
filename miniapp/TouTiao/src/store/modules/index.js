@@ -2,15 +2,30 @@ import {getSetting, getFeed} from '@/data/index';
 
 const state = {
   channels: [],
-  newsList: []
+  newsList: [],
+  hot_time: []
 }
 
 const mutations = {
   updateChannels(state, channels){
-    state.channels = channels;
+    state.channels = channels.filter(item=>{
+      return !item.defaultNotShow
+    });
   },
   updateNewsList(state, newsList){
     state.newsList = newsList;
+    state.hot_time = newsList.map(item=>{
+      return item.content.behot_time;
+    }).sort()[0];
+    console.log('hot_time...', state.hot_time)
+  },
+  // 删除新闻
+  removeNews(state, id){
+    // 找到下标
+    let index = state.newsList.findIndex(item=>{
+      return item.content.item_id == id;
+    })
+    state.newsList.splice(index,1);
   }
 }
 
