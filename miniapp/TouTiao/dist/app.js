@@ -2,16 +2,16 @@ require("./common/manifest.js")
 require("./common/vendor.js")
 global.webpackJsonp([2],{
 
-/***/ 69:
+/***/ 70:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex_dist_logger__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex_dist_logger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuex_dist_logger__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_index__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_index__ = __webpack_require__(83);
 
 
 
@@ -30,16 +30,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 /***/ }),
 
-/***/ 70:
+/***/ 71:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_awesome_typescript_loader_useCache_true_app_ts__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_awesome_typescript_loader_useCache_true_app_ts__ = __webpack_require__(74);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(83)
+  __webpack_require__(84)
 }
 var normalizeComponent = __webpack_require__(20)
 /* script */
@@ -82,7 +82,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 73:
+/***/ 74:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120,7 +120,7 @@ var __decorate = this && this.__decorate || function (decorators, target, key, d
     }return c > 3 && r && __WEBPACK_IMPORTED_MODULE_5_babel_runtime_core_js_object_define_property___default()(target, key, r), r;
 };
 
-var debug = __webpack_require__(47)('log:App');
+var debug = __webpack_require__(48)('log:App');
 // 必须使用装饰器的方式来指定components
 var App = function (_Vue) {
     __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default()(App, _Vue);
@@ -168,13 +168,13 @@ App = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_vue_property
 
 /***/ }),
 
-/***/ 77:
+/***/ 78:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fly; });
 /* unused harmony export wxApiToPromise */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flyio_dist_npm_wx__ = __webpack_require__(148);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flyio_dist_npm_wx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_flyio_dist_npm_wx__);
@@ -246,13 +246,13 @@ function wxApiToPromise(api, arg1) {
 
 /***/ }),
 
-/***/ 78:
+/***/ 79:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getSetting; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getFeed; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(78);
 
 // 获取顶部tab
 var getSetting = function getSetting() {
@@ -262,16 +262,20 @@ var getSetting = function getSetting() {
 var getFeed = function getFeed(url) {
     return __WEBPACK_IMPORTED_MODULE_0__api__["a" /* fly */].request(url);
 };
+// // 获取分类分页数据
+// export let getMore = (params)=>{
+//   return fly.request('https://lf.snssdk.com/api/news/feed/v66/?language=zh-Hans-CN&count=20&aid=1162&device_id=6650307045722932750', params)
+// }
 
 /***/ }),
 
-/***/ 79:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_property_decorator__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(70);
 
 
 var isApp = false; //尝试mpvue-entry
@@ -289,7 +293,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue_property_decorator__["a" /* Vue */].prototype.$s
 /* app-only-end */
 if (isApp) {
     // 在这个地方引入是为了registerHooks先执行
-    MyApp = __webpack_require__(70).default;
+    MyApp = __webpack_require__(71).default;
 } else {
     // MyApp = require('./index.vue')
 }
@@ -298,7 +302,7 @@ app.$mount();
 
 /***/ }),
 
-/***/ 82:
+/***/ 83:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -306,7 +310,10 @@ app.$mount();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_index__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_index__ = __webpack_require__(79);
+
 
 
 
@@ -314,7 +321,7 @@ app.$mount();
 var state = {
   channels: [],
   newsList: [],
-  hot_time: []
+  hot_time: ''
 };
 
 var mutations = {
@@ -327,8 +334,21 @@ var mutations = {
     state.newsList = newsList;
     state.hot_time = newsList.map(function (item) {
       return item.content.behot_time;
-    }).sort()[0];
+    }).sort(function (a, b) {
+      return b - a;
+    })[0];
     console.log('hot_time...', state.hot_time);
+  },
+
+  // 上拉加载
+  appendNewsList: function appendNewsList(state, newsList) {
+    state.newsList = [].concat(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray___default()(state.newsList), __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_toConsumableArray___default()(newsList));
+    console.log(state.newsList.length);
+    state.hot_time = newsList.map(function (item) {
+      return item.content.behot_time;
+    }).sort(function (a, b) {
+      return b - a;
+    })[0];
   },
 
   // 删除新闻
@@ -353,7 +373,7 @@ var actions = {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__data_index__["a" /* getSetting */])();
+              return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__data_index__["a" /* getSetting */])();
 
             case 2:
               channels = _context.sent;
@@ -380,7 +400,7 @@ var actions = {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__data_index__["b" /* getFeed */])(url);
+              return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__data_index__["b" /* getFeed */])(url);
 
             case 2:
               news = _context2.sent;
@@ -399,6 +419,39 @@ var actions = {
         }
       }, _callee2, _this2);
     }))();
+  },
+  getMore: function getMore(_ref3, url) {
+    var _this3 = this;
+
+    var commit = _ref3.commit,
+        state = _ref3.state;
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+      var news;
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              url += '&max_behot_time=' + state.hot_time;
+              _context3.next = 3;
+              return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__data_index__["b" /* getFeed */])(url);
+
+            case 3:
+              news = _context3.sent;
+
+              news.data.forEach(function (item) {
+                // 格式化content
+                item.content = JSON.parse(item.content);
+              });
+              commit('appendNewsList', news.data);
+              console.log('news...', news);
+
+            case 7:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, _this3);
+    }))();
   }
 };
 
@@ -411,12 +464,12 @@ var actions = {
 
 /***/ }),
 
-/***/ 83:
+/***/ 84:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
 
-},[79]);
+},[80]);
 //# sourceMappingURL=app.js.map

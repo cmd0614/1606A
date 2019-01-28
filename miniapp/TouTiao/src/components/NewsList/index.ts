@@ -16,12 +16,6 @@ class List extends Vue {
     default: []
   }) list;
 
-  get hot_time(){
-    return this.list.map(item=>{
-      return item.content.behot_time
-    })
-  }
-
   mounted() {
      console.log('list...')
   }
